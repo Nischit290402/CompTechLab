@@ -5,5 +5,5 @@ else
 lex $1.l
 bison -d $1.y
 gcc $1.tab.c lex.yy.c -lfl
-./$1
+./a.out
 fi

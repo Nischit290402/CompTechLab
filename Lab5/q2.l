@@ -6,11 +6,11 @@ int yylex();
 
 %%
 
-[0-9]*   { return operand; }
-[+\-*/]  { return operator; }
-[ ]      {}
-\n       { return *yytext; }
-.        { return *yytext; }
+\-?[a-zA-Z0-9]*   { return operand; }
+[+\-*/]        { return operator; }
+[ ]            {}
+\n             { return *yytext; }
+.              { return *yytext; }
 
 %%
 
