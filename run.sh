@@ -1,3 +1,4 @@
+#!/bin/bash
 if [[ $1 == "" ]]
  then
  echo "Provide an input name as argument"
