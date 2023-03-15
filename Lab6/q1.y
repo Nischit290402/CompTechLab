@@ -11,10 +11,11 @@ float res = 0;
 %left UMINUS
 
 %union {
-    int intval;
     float realval;
 }
+
 %type <realval> stmt expr
+
 %%
 
 stmt: error '\n' {YYABORT;}

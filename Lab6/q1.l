@@ -6,8 +6,8 @@ int yylex();
 
 %%
 
-[0-9]*   { yylval.realval = atof(yytext); return id;}
-[+\-*/()]        { return *yytext; }
+[0-9]*         { yylval.realval = atof(yytext); return id;}
+[+\-*/()]      { return *yytext; }
 [ ]            {}
 \n             { return *yytext; }
 .              { return *yytext; }
