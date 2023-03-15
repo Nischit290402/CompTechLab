@@ -38,7 +38,7 @@ int main(void) {
             printf("Rejected\n");
         } else {
             printf("Accepted\n");
-            printf("Result: %f\n", res);
+            printf("Result: %0.2f\n", res);
         }
         res = 0;
     }
