@@ -2,11 +2,14 @@
 #include <stdio.h>
 int yylex();
 void yyerror(char *s);
-int operator_count = 0;
-int operand_count = 0;
 %}
 
-%token hv nhv
+
+%union {
+    char* string;
+}
+
+%token <string> hv nhv
 
 %%
 
@@ -14,13 +17,13 @@ stmt: error '\n' {YYABORT;}
 | S '\n' {YYACCEPT;}
 ;
 
-S: 
-| S T {}
+S:
+| S T
 ;
 
 T:
- hv {printf(" : is helping verb\n");}
-| nhv {printf(" : is not helping verb\n");}
+hv {printf("%s : is helping verb\n", $1);}
+| nhv {printf("%s : is not helping verb\n", $1);}
 ;
 %%
 
@@ -36,5 +39,5 @@ int main(void) {
 }
 
 void yyerror(char *s) {
-    // fprintf(stderr, "error: %s\n", s);
+    fprintf(stderr, "error: %s\n", s);
 }
