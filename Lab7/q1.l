@@ -6,7 +6,8 @@ int yylex();
 
 %%
 
-[01]*         { yylval.string = yytext; return id;}
+[01]           { yylval.realval = atof(yytext); return id;}
+\.             { return *yytext; }
 [ ]            {}
 \n             { return *yytext; }
 .              { return *yytext; }

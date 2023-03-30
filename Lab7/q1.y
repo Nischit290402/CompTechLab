@@ -2,21 +2,31 @@
 #include <stdio.h>
 int yylex();
 void yyerror(char *s);
-char* res = "";
+float res = 0;
 %}
 
-%token <string> id
+%token <realval> id
 
 %union {
-    char* string;
+    float realval;
 }
 
-%type <string> stmt
+%type <realval> stmt expr D F
 
 %%
 
 stmt: error '\n' {YYABORT;}
-| id '\n' {res = $1; YYACCEPT;}
+| expr '\n' {res = $1; YYACCEPT;}
+;
+
+expr: D '.' F {$$ = $1 + $3;}
+| D {$$ = $1;}
+;
+D : D id {$$ = 2*$1 + $2;}
+| id {$$ = $1;}
+;
+F : id F {$$ = 0.5*($1 + $2);}
+| id {$$ = 0.5*$1;}
 ;
 %%
 
@@ -26,16 +36,9 @@ int main(void) {
             printf("Rejected\n");
         } else {
             printf("Accepted\n");
-            // convert binary string to decimal
-            int decimal = 0;
-            int i = 0;
-            while (res[i] != '\n') {
-                decimal = decimal * 2 + (res[i] - '0');
-                i++;
-            }
-            printf("Decimal: %d\n", decimal);
+            printf("Decimal: %f\n", res);
         }
-        res = "";
+        res = 0;
     }
     return 0;
 }

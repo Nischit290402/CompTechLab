@@ -21,13 +21,13 @@ stmt: error '\n' {YYABORT;}
 expr: username '@' url
 ;
 
-url: domain '.' tld {printf("%s", $$); if(strlen($$) > 64) YYABORT;}
+url: domain '.' tld {if(strlen($$) > 64) YYABORT;}
 ;
 
 tld: str
 ;
 
-username: rec {printf("%s\n", $$); if(strlen($$) > 64) YYABORT;}
+username: rec {if(strlen($$) > 64) YYABORT;}
 ;
 
 rec: str '.' rec 
