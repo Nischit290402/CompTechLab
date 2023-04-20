@@ -5,7 +5,7 @@ int yylex();
 void yyerror(char *s);
 %}
 
-%token <string> str special
+%token <string> str
 
 %union {
     char* string;
